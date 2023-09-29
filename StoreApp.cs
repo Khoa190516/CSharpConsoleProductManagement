@@ -16,6 +16,7 @@ namespace CSharpConsoleProductManagement
         protected readonly IBaseAction<Category> categoryAction;
         protected readonly IViewAction<Category> categoryViewAction;
         protected readonly IBaseAction<Product> productAction;
+        protected readonly CategoryAction categoryBaseAction;
 
         protected StoreApp()
         {
@@ -25,9 +26,10 @@ namespace CSharpConsoleProductManagement
                 Categories = new()
             };
 
-            categoryAction = new CategoryAction(store);
+            categoryBaseAction = new(store);
+            categoryAction = categoryBaseAction;
             productAction = new ProductAction(store);
-            categoryViewAction = new CategoryAction(store);
+            categoryViewAction = categoryBaseAction;
         }
 
         public static StoreApp Instance()
